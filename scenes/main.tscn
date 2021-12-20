@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/car.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/dev/dev_dark_grey.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 1000, 1000, 1000 )
+
+[node name="main" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.888281, 0.198725, -0.414084, 0, 0.901553, 0.432668, 0.459301, -0.384331, 0.800833, 0, 0, 0 )
+
+[node name="ground" type="CSGBox" parent="."]
+use_collision = true
+width = 2000.0
+height = 1.0
+depth = 2000.0
+material = SubResource( 1 )
+
+[node name="car" parent="." instance=ExtResource( 1 )]
