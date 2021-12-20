@@ -95,7 +95,8 @@ func add_torques(delta, throttle, braking):
 		spin += delta * net_torque / wheel_moment
 
 
-
+func steer_ackerman(input, max_steer, ackermann):
+	rotation.y = max_steer * (input + (1 - cos(input * 0.5 * PI)) * ackermann)
 
 
 func do_debug_stuff():
@@ -106,6 +107,7 @@ func do_debug_stuff():
 		+ "    spin:  %s\n" % [spin]
 		+ "    net_torque:  %s\n" % [net_torque]
 		+ "    wheel_moment:  %s\n" % [wheel_moment]
+		+ "    rot_y:  %s\n" % [rotation.y]
 #		+ "    b: %s\n" % [bump]
 #		+ "    r: %s\n" % [rebound]
 #		+ "    c: %s\n" % [compress]
