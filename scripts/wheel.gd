@@ -26,6 +26,7 @@ var radius:float = 0.4
 var wheel_moment:float
 
 const TORQUE_POWER:float = 1000.0
+const BRAKE_POWER:float = 2000.0
 var net_torque:float
 
 
@@ -73,12 +74,12 @@ func simulate_suspensions(delta):
 	if $RayCast.is_colliding():
 		car.add_force(global_transform.basis.x * x_force, contact)
 		car.add_force(normal * y_force, contact)
-		car.add_force(global_transform.basis.x * z_force, contact)
+		car.add_force(global_transform.basis.y * z_force, contact)
 
 	prev_compress = compress
 
 
-func add_torques(delta, throttle):
+func add_torques(delta, throttle, braking):
 	var drive_torque = TORQUE_POWER * throttle
 
 	net_torque = z_force * radius
@@ -86,7 +87,7 @@ func add_torques(delta, throttle):
 
 	wheel_moment = 0.5 * wheel_mass * radius * radius
 
-	var brake_torque = TORQUE_POWER * throttle
+	var brake_torque = BRAKE_POWER * braking
 	if spin < 5 and brake_torque > abs(net_torque):
 		spin = 0
 	else:

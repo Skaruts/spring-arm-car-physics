@@ -20,20 +20,20 @@ radius = 0.4
 albedo_texture = ExtResource( 4 )
 
 [node name="car" type="RigidBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.882223, 0 )
 input_ray_pickable = false
 mass = 1500.0
 can_sleep = false
 script = ExtResource( 2 )
 
 [node name="TrackballCamera" type="Camera" parent="."]
-transform = Transform( -4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, -5.2, -0.36797, 0.2 )
+transform = Transform( -4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, -5.2, 0.740464, 0.2 )
 script = ExtResource( 1 )
 stabilize_horizon = true
 friction = 0.17
 
 [node name="mesh" type="CSGBox" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -1.4, 0 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.291566, 0 )
 width = 4.0
 height = 1.0
 depth = 1.6
@@ -46,11 +46,11 @@ depth = 1.4
 material = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0915661, 0 )
 shape = SubResource( 2 )
 
 [node name="lf_wheel" type="SpringArm" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.95, -1.60258, -1.15 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.95, -0.494146, -1.15 )
 shape = SubResource( 3 )
 script = ExtResource( 3 )
 
@@ -67,7 +67,7 @@ enabled = true
 cast_to = Vector3( 0, 0, 0.41 )
 
 [node name="rf_wheel" type="SpringArm" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.95, -1.603, -1.15 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.95, -0.494566, -1.15 )
 shape = SubResource( 3 )
 script = ExtResource( 3 )
 
@@ -84,7 +84,7 @@ enabled = true
 cast_to = Vector3( 0, 0, 0.41 )
 
 [node name="lr_wheel" type="SpringArm" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.95, -1.60258, 1.15 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.95, -0.494146, 1.15 )
 shape = SubResource( 3 )
 script = ExtResource( 3 )
 
@@ -101,7 +101,7 @@ enabled = true
 cast_to = Vector3( 0, 0, 0.41 )
 
 [node name="rr_wheel" type="SpringArm" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.95, -1.603, 1.15 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.95, -0.494566, 1.15 )
 shape = SubResource( 3 )
 script = ExtResource( 3 )
 

@@ -13,15 +13,17 @@ onready var wheels := [
 #onready var rr_wheel := $rr_wheel
 
 
-var throttle:float = 0.0  #is this a throttle?
+var throttle:float = 0.0
+var braking:float = 0.0
 
 
 func _physics_process(delta) -> void:
-	throttle = Input.get_action_strength("accelerate")-Input.get_action_strength("brake")
+	throttle = Input.get_action_strength("accelerate")
+	braking = Input.get_action_strength("brake")
+
 	for w in wheels:
 		w.simulate_suspensions(delta)
-
-		w.add_torques(delta, throttle)
+		w.add_torques(delta, throttle, braking)
 
 
 
