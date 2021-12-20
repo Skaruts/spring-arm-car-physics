@@ -23,16 +23,15 @@ func _ready() -> void:
 	label.name = "debug_label"
 	label.rect_scale = Vector2.ONE * text_scale
 
-
-	ig.set_name("debug_ig")
 	add_child(ig)
+	ig.name = "debug_ig"
 	ig.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
 
 	var mat = SpatialMaterial.new()
 	ig.material_override = mat
 
 	mat.vertex_color_use_as_albedo = true
-	mat.params_line_width   = 10		# not working in GLES2
+	mat.params_line_width   = 5		# not working in GLES2
 	mat.flags_unshaded      = true
 	mat.flags_no_depth_test = true
 	mat.flags_transparent = true

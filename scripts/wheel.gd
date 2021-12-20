@@ -16,7 +16,7 @@ export(float, 1, 2.5, 0.05) var z_shape = 2.5    # 1.65
 export(float, 0, 20, 0.1) var stiff = 50          # 10
 export(float, -10, 0, 0.05) var curve = 0         # 0
 
-export(float, 0, 1000, 2.5) var wheel_mass = 10
+export(float, 0, 500, 1) var wheel_mass = 10
 
 var x_force:float
 var y_force:float
@@ -29,19 +29,24 @@ var radius:float = 0.4
 var wheel_moment:float
 
 const TORQUE_POWER:float = 1000.0
-
-
 var net_torque:float
-
 
 
 func _ready():
 	spring_length = starting_length
-	add_excluded_object(car)
-	$RayCast.add_exception(car)
-	$RayCast.add_exception(self)
-	pass
+#	add_excluded_object(car)
+#	$RayCast.add_exception(car)
+#	$RayCast.add_exception(self)
 
+
+func _process(delta: float) -> void:
+	$mesh.rotate_x(-spin * delta)
+
+	do_debug_stuff()
+
+
+func pacejka(slip, tire_shape):
+	return y_force * peak * sin(tire_shape * atan(stiff * slip - curve * (stiff * slip - atan(stiff * slip))))
 
 
 func simulate_suspensions(delta):
@@ -90,17 +95,6 @@ func add_torques(delta, throttle):
 	else:
 		net_torque -= brake_torque * sign(spin)
 		spin += delta * net_torque / wheel_moment
-
-
-func pacejka(slip, tire_shape):
-	return y_force * peak * sin(tire_shape * atan(stiff * slip - curve * (stiff * slip - atan(stiff * slip))))
-
-
-func _process(delta: float) -> void:
-	$mesh.rotate_x(-spin * delta)
-
-	do_debug_stuff()
-
 
 
 

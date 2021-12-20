@@ -1,44 +1,27 @@
 extends RigidBody
 
-onready var wheels:Array = [
+onready var wheels := [
 	$lf_wheel,
 	$rf_wheel,
 	$lr_wheel,
 	$rr_wheel,
 ]
 
-# onready var RF_Wheel = $RF_Wheel
-# onready var LF_Wheel = $LF_Wheel
-# onready var RR_Wheel = $RR_Wheel
-# onready var LR_Wheel = $LF_Wheel
+#onready var lf_wheel := $lf_wheel
+#onready var rf_wheel := $rf_wheel
+#onready var lr_wheel := $lr_wheel
+#onready var rr_wheel := $rr_wheel
 
 
-# Engine power (multiplies angular motor TARGET VELOCITY): max speed
-# Wheel Force Limit (multiplies angular motor FORCE LIMIT): acceleration
+var throttle:float = 0.0  #is this a throttle?
 
 
-
-func _ready():
-	pass
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("recover"):
-		print("recovering")
-
-#		$VehicleRigidBody.translation.y = 5
-#		$VehicleRigidBody.rotation = original_rot# Vector3(0,$VehicleRigidBody.rotation.y,0)
-
-
-var throttle:float = 0.0
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	throttle = Input.get_action_strength("accelerate")-Input.get_action_strength("brake")
 	for w in wheels:
 		w.simulate_suspensions(delta)
 
 		w.add_torques(delta, throttle)
-
-
 
 
 
@@ -54,5 +37,4 @@ func _process(_delta:float) -> void:
 		Color.white
 		)
 
-	pass
 
