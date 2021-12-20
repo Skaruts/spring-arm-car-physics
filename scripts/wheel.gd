@@ -1,11 +1,9 @@
 extends SpringArm
 
-onready var debug_print = name == "LF_Wheel"
+onready var car = $".."
 
 var starting_length = 0.5
 var compress = 0
-onready var car = $".."
-
 var spring:float = 15000.0
 var bump:float = 1000
 var rebound:float = 1000
@@ -15,7 +13,6 @@ export(float, 1, 2.5, 0.05) var x_shape = 0.05    # 1.35
 export(float, 1, 2.5, 0.05) var z_shape = 2.5    # 1.65
 export(float, 0, 20, 0.1) var stiff = 50          # 10
 export(float, -10, 0, 0.05) var curve = 0         # 0
-
 export(float, 0, 500, 1) var wheel_mass = 10
 
 var x_force:float
