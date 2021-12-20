@@ -41,6 +41,7 @@ func _physics_process(delta) -> void:
 		w.add_torques(delta, throttle, braking)
 
 	do_steering_ackerman()
+#	do_steering(delta)
 
 
 func do_steering_ackerman():
@@ -51,15 +52,27 @@ func do_steering_ackerman():
 		if steer_dir == steering:
 			steer_value = clamp(steer_value+steer_speed, 0, max_steer)
 		steer_dir = sign(steering)
-
 	elif steer_value != 0:
 		steer_value = clamp(steer_value-steer_speed, 0, max_steer)
-		if steer_value < 1:
+		if steer_value < 1: # TODO: this is from old code, and is not entirely needed
 			steer_value = 0
 			steer_dir = 0
 
-	lf_wheel.steer_ackerman(-steer_dir, deg2rad(abs(steer_value)), ackermann*steer_dir)
-	rf_wheel.steer_ackerman(-steer_dir, deg2rad(abs(steer_value)), ackermann*steer_dir)
+	var steer_value_rads := deg2rad(abs(steer_value))
+	lf_wheel.steer_ackerman(-steer_dir, steer_value_rads, ackermann*steer_dir)
+	rf_wheel.steer_ackerman(-steer_dir, steer_value_rads, ackermann*steer_dir)
+
+
+func do_steering(delta):
+	var turn_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+
+	if   turn_input != 0: steer_value = clamp(steer_value + steer_speed * sign(turn_input), -max_steer, max_steer)
+	elif steer_value > 0: steer_value = clamp(steer_value - steer_speed, 0, max_steer)
+	else:                 steer_value = clamp(steer_value + steer_speed, -max_steer, 0)
+
+	var steer_value_rads := deg2rad(steer_value)
+	lf_wheel.steer(-steer_value_rads)
+	rf_wheel.steer(-steer_value_rads)
 
 
 func _process(_delta:float) -> void:

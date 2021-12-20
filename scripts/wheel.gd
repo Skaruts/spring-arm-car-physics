@@ -98,6 +98,9 @@ func add_torques(delta, throttle, braking):
 func steer_ackerman(input, max_steer, ackermann):
 	rotation.y = max_steer * (input + (1 - cos(input * 0.5 * PI)) * ackermann)
 
+func steer(steer_angle):
+	rotation.y = steer_angle
+
 
 func do_debug_stuff():
 	debug.monitor(
